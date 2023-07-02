@@ -32,24 +32,29 @@ if __name__ == "__main__":
     
     #Time period inputs for the request every 3 months
     """
-    Batch 1 = January 1, 2022 - March 31, 2022
-    Batch 2 = April 1, 2022 - June 30, 2022
-    Batch 3 = July 1, 2022 - September 30, 2022
-    Batch 4 = October 1, 2022 - December 31, 2022
+    Batch 1 = January 1, 2023 - January 31, 2022
+    Batch 2 = February 1, 2022 - February 28, 2022
+    Batch 3 = March 1, 2022 - March 33, 2022
+    Batch 4 = April 1, 2022 - April 30, 2022
+    Batch 5 = May 1, 2022 - May 24, 2022
     """
-    keyword = "(e-vehicle OR (electric vehicle) OR (kendaraan listrik) OR (mobil listrik) OR (motor listrik) OR (bus listrik) OR #evehicle OR #electricvehicle OR #kendaraanlistrik OR #mobillistrik OR #motorlistrik OR #buslistrik) lang:id"
-    start_list = ['2021-01-01',
-                 '2021-04-01',
-                 '2021-07-01',
-                 '2021-10-01']
+    keyword = '((e-vehicle OR ev OR "electric vehicle" OR "kendaraan listrik" OR "mobil listrik" OR "motor listrik" OR tesla OR "wuling air ev" OR "renault twizy" OR "nissan leaf" OR "hyundai ioniq") (harga OR mahal OR murah OR biaya OR performa OR "jarak tempuh" OR kilometer OR km OR awet OR irit OR hemat OR fitur OR canggih OR mesin OR akselerasi OR torsi OR kecepatan OR nyaman OR enak OR charging OR charge OR cas OR baterai OR battery OR "charging station" OR "stasiun pengisian kendaraan listrik umum" OR spklu OR pln OR stasiun OR infrastruktur OR nikel OR pertamina OR insentif OR subsidi OR pajak OR pemerintah OR kebijakan OR peraturan OR lingkungan OR emisi OR karbondioksida OR polusi OR energi OR co2 OR iklim)) lang:id -is:retweet'
+    start_list = ['2023-01-01',
+                 '2023-02-01',
+                 '2023-03-01',
+                 '2023-04-01',
+                 '2023-05-01',
+                 '2023-06-01']
 
-    end_list =   ['2021-03-31',
-                 '2021-06-30',
-                 '2021-09-30',
-                 '2021-12-31']
+    end_list =   ['2023-01-31',
+                 '2023-02-28',
+                 '2023-03-31',
+                 '2023-04-30',
+                 '2023-05-31',
+                 '2023-06-30']
     
-    max_tweets = 60000
-    max_request = 300
+    max_tweets = 100
+    max_request = 500
     count_request = 0
     tweets = []
     total_tweets = 0
@@ -70,12 +75,12 @@ if __name__ == "__main__":
         
         print("Total Tweets Added from this time period: ", count)
 
-        if i != len(start_list):
-            time.sleep(930) # Give 15+ Minutes delay for every time period
-        else:
-            continue
+        # if i != len(start_list):
+        #     time.sleep(930) # Give 15+ Minutes delay for every time period
+        # else:
+        #     continue
 
-    with open('data.json', 'w') as f:
+    with open('data/data.json', 'w') as f:
         json.dump(tweets, f)
 
     for k in range (0, len(tweets)):

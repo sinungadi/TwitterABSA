@@ -38,13 +38,13 @@ def getReferencedTweets(tweet):
             for reference_tweet in tweet['referenced_tweets']:
                 reference_type.append(reference_tweet['type'])
             
-        return reference_type
-    
+            return reference_type
     else:
         return None
     
 def generateTemp():
     return {
+        'tweet_id' : None,
         'created_at': None,
         'author_id': None,
         'username' : None,
@@ -64,14 +64,15 @@ if __name__ == "__main__":
             temp = generateTemp()
 
             temp.update({
+                'tweet_id' : tweet['id'],
                 'created_at': tweet['created_at'],
                 'author_id': tweet['author_id'],
                 'username': getUserData(tweet, data[i]['includes']['users'])['username'],
                 'text': tweet['text'],
                 'reference_type': getReferencedTweets(tweet),
-            })
+            }) # type: ignore
 
             data_tweets.append(temp)
 
     df = pd.DataFrame(data_tweets)
-    df.to_csv('data.csv', index=False)
+    df.to_csv('data/data.csv', index=False)
